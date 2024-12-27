@@ -35,7 +35,7 @@ class ModelTrainer:
                 padding="max_length"
             )
 
-        tokenized_train = dataset_samsum_pt["test"].map(preprocess_function, batched=True)
+        tokenized_train = dataset_samsum_pt["train"].map(preprocess_function, batched=True)
         tokenized_validation = dataset_samsum_pt["validation"].map(preprocess_function, batched=True)
         
         # Set up training arguments
@@ -65,7 +65,7 @@ class ModelTrainer:
             eval_dataset=tokenized_validation,
         )
         
-        logger.info("Starting training...")
+        logger.info("Starting training....")
         
         # Train the model
         try:
@@ -73,6 +73,8 @@ class ModelTrainer:
         except Exception as e:
             logger.exception("Training failed.")
             raise e
+        
+        logger.info("Saving the model ....")
         
         # Save the fine-tuned model and tokenizer
         model_pegasus.save_pretrained(os.path.join(self.config.root_dir, "pegasus-samsum-model"))
