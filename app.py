@@ -1,19 +1,24 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Form, Request
 import uvicorn
-import sys
 import os
 from fastapi.templating import Jinja2Templates
-from starlette.responses import RedirectResponse
-from fastapi.responses import Response
+from fastapi.responses import RedirectResponse, HTMLResponse, Response
+from fastapi.staticfiles import StaticFiles
 from textSummarizer.pipeline.prediction import PredictionPipeline
 
-text: str = "What is Text Summarization?"
-
 app = FastAPI()
+
+# Mount static files
+app.mount("/static", StaticFiles(directory="static"), name="static")
+
+# Jinja2 Templates
+templates = Jinja2Templates(directory="templates")
+
 
 @app.get("/", tags=["authentication"])
 async def index():
     return RedirectResponse(url="/docs")
+
 
 @app.get("/train")
 async def training():
@@ -21,16 +26,30 @@ async def training():
         os.system("python main.py")
         return Response("Training successful !!")
     except Exception as e:
-        return Response(f"Error Occurred! (e)")
-    
-@app.post("/predict")
-async def predict_route(text):
+        return Response(f"Error Occurred! {e}")
+
+
+@app.get("/summarizer", response_class=HTMLResponse)
+async def summarizer_page(request: Request):
+    return templates.TemplateResponse(
+        "index.html", {"request": request, "summary": None}
+    )
+
+
+@app.post("/summarizer", response_class=HTMLResponse)
+async def summarizer(request: Request, text: str = Form(...)):
     try:
         obj = PredictionPipeline()
-        text = obj.predict(text)
-        return text
+        summary = obj.predict(text)
+        print(f"Generated summary: {summary}")
+        return templates.TemplateResponse(
+            "index.html", {"request": request, "summary": summary}
+        )
     except Exception as e:
-        return e
-    
+        return templates.TemplateResponse(
+            "index.html", {"request": request, "summary": f"Error: {e}"}
+        )
+
+
 if __name__ == "__main__":
-    uvicorn.run(app, host = "0.0.0.0", port = 8000)
+    uvicorn.run(app, host="0.0.0.0", port=8080)
