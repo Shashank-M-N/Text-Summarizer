@@ -2,7 +2,7 @@ from fastapi import FastAPI, Form, Request
 import uvicorn
 import os
 from fastapi.templating import Jinja2Templates
-from fastapi.responses import RedirectResponse, HTMLResponse, Response
+from fastapi.responses import RedirectResponse, JSONResponse, HTMLResponse
 from fastapi.staticfiles import StaticFiles
 from textSummarizer.pipeline.prediction import PredictionPipeline
 
@@ -24,9 +24,19 @@ async def index():
 async def training():
     try:
         os.system("python main.py")
-        return Response("Training successful !!")
+        return JSONResponse(
+            content={
+                "status": "completed",
+                "message": "Training completed successfully!",
+            }
+        )
     except Exception as e:
-        return Response(f"Error Occurred! {e}")
+        return JSONResponse(
+            content={
+                "status": "error",
+                "message": f"Error occurred during training: {e}",
+            }
+        )
 
 
 @app.get("/summarizer", response_class=HTMLResponse)

@@ -5,6 +5,9 @@ from textSummarizer.pipeline.stage_04_model_trainer import ModelTrainerTrainingP
 from textSummarizer.pipeline.stage_05_model_evaluation import ModelEvaluationTrainingPipeline
 from textSummarizer.logging import logger
 from filelock import FileLock
+import warnings
+
+warnings.filterwarnings("ignore", category=UserWarning, module="transformers.modeling_utils")
 
 LOCK_FILE = "pipeline.lock"
 
