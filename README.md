@@ -55,7 +55,10 @@ To install the project, follow these steps:
    pip install --use-pep517 -r requirements.txt  
    ```  
    > **Note**:  
-   > - If you encounter an error related to `-e .` in `requirements.txt`, remove `-e .` from the file and re-run the above command.  
+   > - If you are using **Linux** and encounter an error related to `-e .`, use the following command instead:  
+   >   ```bash  
+   >   sudo pip install --use-pep517 -r requirements.txt  
+   >   ```  
    > - Using the `--use-pep517` flag ensures compatibility and avoids potential warnings during dependency installation.
 
 ## Usage Instructions  
