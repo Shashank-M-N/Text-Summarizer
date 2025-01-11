@@ -1,6 +1,7 @@
 from fastapi import FastAPI, Form, Request
 import uvicorn
 import os
+import shutil
 from fastapi.templating import Jinja2Templates
 from fastapi.responses import RedirectResponse, JSONResponse, HTMLResponse
 from fastapi.staticfiles import StaticFiles
@@ -23,7 +24,12 @@ async def index():
 @app.get("/train")
 async def training():
     try:
-        os.system("python main.py")
+        python_command = "python"
+        if shutil.which("python3") and not shutil.which("python"):
+            python_command = "python3"
+        # Execute the main.py script
+        os.system(f"{python_command} main.py")
+
         return JSONResponse(
             content={
                 "status": "completed",
