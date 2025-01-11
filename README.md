@@ -24,7 +24,7 @@ This project leverages a **modular coding approach** to build a text summarizati
 
 - The model is **fine-tuned** on the **[Samsum dataset](https://github.com/Shashank-M-N/Datasets/raw/main/summarizer-data.zip)**, which consists of human-written dialogues and their summaries.  
 - It uses the **`google/pegasus-cnn_dailymail`** pre-trained transformer model for abstractive summarization. This model is optimized for handling long text inputs and generating concise summaries.  
-- **Note**: The pre-trained model provided may not be highly accurate as it was trained on limited resources. Training took approximately **13 hours**, so be prepared if you plan to train the model from scratch.  
+- **Note**: The pre-trained model provided may not be highly accurate as it was trained on limited resources. Training took approximately **13 hours**, so be prepared if you plan to train the model from scratch. To use the model, download the zipped folder from the link, unzip it, and place it in the same directory as `app.py`.  
 
 ## Features  
 
@@ -40,7 +40,7 @@ To install the project, follow these steps:
 
 1. Clone the repository:  
    ```bash  
-   git clone https://github.com/yourusername/text-summarizer.git  
+   git clone https://github.com/Shashank-M-N/text-summarizer.git  
    cd text-summarizer  
    ```  
 
@@ -62,18 +62,24 @@ To install the project, follow these steps:
 
 1. **Train the Model**:  
    - Before using the summarizer, you **must train the model**.  
-   - You can either train the model using your dataset or download my pre-trained model via this [link](#).  
-     > **Note**: My pre-trained model was fine-tuned on the Samsum dataset and may not be highly accurate but performs decently. Training took **13 hours**, so be prepared for a long training time if starting from scratch.  
+   - You can either train the model using your dataset or download my pre-trained model via this [link](https://mega.nz/file/uZ5mWSbL#pDyM8CGp60mVusBR_lGX5i8C5sH95EzzI7b82clD-nw).
+     > **Note**: The pre-trained model was fine-tuned on the Samsum dataset and may not be highly accurate but performs decently. Training took **13 hours**, so be prepared for a long training time if starting from scratch.  
+     - To use the pre-trained model, download the zipped folder from the link, unzip it, and place the folder in the same directory as `app.py`.  
    - To train the model, follow these steps:  
      - Open the application by running:  
        ```bash  
        python app.py  
        ```  
      - Navigate to:  
-       ```
+       ```  
        http://127.0.0.1:8080/summarizer  
        ```  
      - On the webpage, **change the default option from "Use Default Model" to "Train Model"** from the dropdown menu, which will display a **"Training" button**. Click the button to start the training process.  
+
+   Alternatively, you can also train the model by running:  
+   ```bash  
+   python main.py  
+   ```
 
 2. **Summarize Text**:  
    - Once the model is trained, you can use the summarizer.  
