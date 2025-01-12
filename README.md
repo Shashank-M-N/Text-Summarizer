@@ -2,6 +2,8 @@
 
 A **modular** Python-based **Text Summarizer** that processes raw text through multiple stages, including data ingestion, validation, transformation, model training, and evaluation to generate high-quality summaries. The system allows for easy customization and tuning of parameters for improved performance, making it suitable for various summarization tasks.  
 
+>All operations, including training and summarization, are carried out locally on my machine, ensuring complete data privacy and control.
+
 ## Table of Contents  
 
 - [Text Summarizer](#text-summarizer)
