@@ -48,7 +48,7 @@ async def training():
 @app.get("/summarizer", response_class=HTMLResponse)
 async def summarizer_page(request: Request):
     return templates.TemplateResponse(
-        "index.html", {"request": request, "summary": None}
+        "index.html", {"request": request, "summary": None, "text": ""}
     )
 
 
@@ -59,11 +59,11 @@ async def summarizer(request: Request, text: str = Form(...)):
         summary = obj.predict(text)
         print(f"Generated summary: {summary}")
         return templates.TemplateResponse(
-            "index.html", {"request": request, "summary": summary}
+            "index.html", {"request": request, "summary": summary, "text": text}
         )
     except Exception as e:
         return templates.TemplateResponse(
-            "index.html", {"request": request, "summary": f"Error: {e}"}
+            "index.html", {"request": request, "summary": f"Error: {e}", "text": text}
         )
 
 
