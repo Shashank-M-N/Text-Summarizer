@@ -69,7 +69,7 @@ To install the project, follow these steps:
 
 1. **Train the Model**:  
    - Before using the summarizer, you **must train the model**.  
-   - You can either train the model using your dataset or download my pre-trained model via this [link](https://mega.nz/file/uZ5mWSbL#pDyM8CGp60mVusBR_lGX5i8C5sH95EzzI7b82clD-nw).
+   - You can either train the model using your dataset or download my pre-trained model via this [link](https://mega.nz/file/uZ5mWSbL#pDyM8CGp60mVusBR_lGX5i8C5sH95EzzI7b82clD-nw).  
      > **Note**: The pre-trained model was fine-tuned on the Samsum dataset and may not be highly accurate but performs decently. Training took **13 hours**, so be prepared for a long training time if starting from scratch.  
      - To use the pre-trained model, download the zipped folder from the link, unzip it, and place the folder in the same directory as `app.py`.  
    - To train the model, follow these steps:  
@@ -89,15 +89,22 @@ To install the project, follow these steps:
    ```
 
 2. **Summarize Text**:  
-   - Once the model is trained, you can use the summarizer.  
-   - On the same webpage (`http://127.0.0.1:8080/summarizer`):  
+   - Once the model is trained or the pre-trained model is downloaded:  
+     - **Re-run the application** by running:  
+       ```bash  
+       python app.py  
+       ```  
+     - Navigate to:  
+       ```  
+       http://127.0.0.1:8080/summarizer  
+       ```  
      - Enter your text into the provided input field.  
      - Click the **"Summarizer" button** to generate a summary.  
    - The generated summary will appear below the input field.  
 
 3. **Monitor Logs**:  
    - During both training and summarization, logs are printed to the terminal to provide real-time feedback on the application's status and processes.  
-   - At a later time, you can refer to `logs/running_logs.log` to review the terminal outputs. 
+   - At a later time, you can refer to `logs/running_logs.log` to review the terminal outputs.
 
 ## Configuration  
 
